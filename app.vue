@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtPage />
-    <a-button type="primary">测试</a-button>
-  </div>
+  <a-config-provider :theme="theme">
+    <NuxtLayout v-if="route.path !== '/login'">
+       <NuxtPage/>
+    </NuxtLayout>
+    <NuxtPage v-else />
+  </a-config-provider>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+const theme = {
+  token: {
+    colorPrimary: import.meta.env.VITE_COLOR_PRIMARY,
+  },
+};
+</script>
 
 <style>
 html,

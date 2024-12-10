@@ -41,4 +41,7 @@ export default defineNuxtConfig({
   },
   ssr: true,
   compatibilityDate: '2024-12-10',
+  dir: {
+    layouts: 'layouts', // 自定义布局文件夹
+  },
 })
