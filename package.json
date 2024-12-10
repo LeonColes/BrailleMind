@@ -4,13 +4,16 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --dotenv .env.stage",
+    "prod": "nuxt dev --dotenv .env.prod",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "ant-design-vue": "^4.2.6",
     "nuxt": "^3.14.1592",
+    "unplugin-vue-components": "^0.27.5",
     "vue": "latest",
     "vue-router": "latest"
   }
