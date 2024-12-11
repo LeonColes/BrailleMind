@@ -16,15 +16,18 @@
     "joi": "^17.13.3",
     "md5": "^2.3.0",
     "mysql2": "^3.11.5",
+    "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",
     "pinia": "^2.3.0",
     "typescript": "^5.7.2",
     "unplugin-vue-components": "^0.27.5",
+    "uuid": "^11.0.3",
     "vite": "^6.0.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@types/md5": "^2.3.5"
+    "@types/md5": "^2.3.5",
+    "@types/nodemailer": "^6.4.17"
   }
 }
