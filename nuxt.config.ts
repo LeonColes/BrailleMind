@@ -4,26 +4,11 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   vite: {
-    build: {
-      sourcemap: false // 禁用 sourcemap 以提高构建速度
-    },
     plugins: [
       Components({
-        resolvers: [AntDesignVueResolver({
-          importStyle: 'less'
-        })]
+        resolvers: [AntDesignVueResolver({ importStyle: 'less' })]
       })
     ],
-    css: {
-      preprocessorOptions: {
-        less: {
-          modifyVars: {
-            'primary-color': '#00B96B',
-          },
-          javascriptEnabled: true,
-        }
-      }
-    },
     optimizeDeps: {
       include: ['ant-design-vue'],
       exclude: [
@@ -53,7 +38,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      colorPrimary: process.env.VITE_COLOR_PRIMARY
+      colorPrimary: '#1890ff',
     }
   }
 })

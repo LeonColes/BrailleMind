@@ -10,13 +10,11 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "nuxt/app";
 import { onMounted, ref } from 'vue';
-import { defaultTheme } from 'ant-design-vue/es/theme';
 import { useRuntimeConfig } from '#app';
 
 const route = useRoute();  // Nuxt3路由
 const router = useRouter();  // Vue3路由
 const config = useRuntimeConfig(); // 运行时配置
-
 const theme = ref({
   token: {
     colorPrimary: config.public.colorPrimary,
@@ -24,7 +22,7 @@ const theme = ref({
 });
 
 onMounted(() => {
-  if (route.path === '/') router.replace('/home');
+  if(route.path === '/') router.replace('/home');
 });
 </script>
 
