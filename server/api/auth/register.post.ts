@@ -22,15 +22,14 @@ export default defineEventHandler(async (event) => {
 
     // 查重
     try {
-      const [rows]: any = await db().execute('SELECT * FROM users WHERE phone = ?', [body.phone])
-    console.log("查询"+rows)
+      const [rows] = await db().execute('SELECT * FROM users WHERE phone = ?', [body.phone])
     if (rows.length > 0)  return { code: 409, msg: '用户已存在', data: null }
     // 注册
     const [inserUser] = await db().execute('INSERT INTO users (nickname,phone,password) VALUES (?,?,?)', [body.nickname,body.phone,password])
-    console.log("注册"+inserUser)
+    if (inserUser.affectedRows == 1) return { code: 200, msg: '注册成功', data: null }
     } catch(err) {
       return { code: 500, msg: '服务器错误', data: null }
     }
 
-    return {}
+    return null
 })

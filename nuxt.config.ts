@@ -25,7 +25,14 @@ export default defineNuxtConfig({
       }
     },
     optimizeDeps: {
-      include: ['ant-design-vue']
+      include: ['ant-design-vue'],
+      exclude: [
+        'ant-design-vue/es/button/style',
+        'ant-design-vue/es/layout/style',
+        'ant-design-vue/es/breadcrumb/style',
+        'ant-design-vue/es/menu/style',
+        '@ant-design/icons-vue'
+      ]
     },
     server: {
       hmr: {
@@ -44,4 +51,9 @@ export default defineNuxtConfig({
   dir: {
     layouts: 'layouts', // 自定义布局文件夹
   },
+  runtimeConfig: {
+    public: {
+      colorPrimary: process.env.VITE_COLOR_PRIMARY
+    }
+  }
 })

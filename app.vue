@@ -8,22 +8,24 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "nuxt/app";
-import { onMounted } from 'vue';
+import { useRoute, useRouter } from "nuxt/app";
+import { onMounted, ref } from 'vue';
+import { defaultTheme } from 'ant-design-vue/es/theme';
+import { useRuntimeConfig } from '#app';
+
 const route = useRoute();  // Nuxt3路由
 const router = useRouter();  // Vue3路由
+const config = useRuntimeConfig(); // 运行时配置
 
-onMounted(() => {
-  if (route.path === '/') {
-    router.replace('/home');
-  }
+const theme = ref({
+  token: {
+    colorPrimary: config.public.colorPrimary,
+  },
 });
 
-const theme = {
-  token: {
-    colorPrimary: import.meta.env.VITE_COLOR_PRIMARY,
-  },
-};
+onMounted(() => {
+  if (route.path === '/') router.replace('/home');
+});
 </script>
 
 <style>
@@ -31,11 +33,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-}
-
-#app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 </style>
