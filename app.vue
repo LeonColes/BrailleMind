@@ -1,14 +1,24 @@
 <template>
   <a-config-provider :theme="theme">
     <NuxtLayout v-if="route.path !== '/login'">
-       <NuxtPage/>
+      <NuxtPage />
     </NuxtLayout>
     <NuxtPage v-else />
   </a-config-provider>
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
+import { useRoute } from "nuxt/app";
+import { onMounted } from 'vue';
+const route = useRoute();  // Nuxt3路由
+const router = useRouter();  // Vue3路由
+
+onMounted(() => {
+  if (route.path === '/') {
+    router.replace('/home');
+  }
+});
+
 const theme = {
   token: {
     colorPrimary: import.meta.env.VITE_COLOR_PRIMARY,
