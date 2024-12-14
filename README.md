@@ -1,5 +1,8 @@
 # Nuxt Minimal Starter
 
+```
+Vue3.51 + Nuxt3.14 + Ant Design Vue
+```
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
@@ -73,3 +76,13 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+# Docker Build
+```
+<!-- build -->
+docker build -t name .
+
+<!-- run -->
+docker run -d -p 3000:3000 --name newname name
+```
+
