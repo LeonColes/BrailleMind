@@ -1,11 +1,17 @@
 <template>
   <div>
     这是主页
+    <a-button type="primary" @click="test">api</a-button>
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less" scoped></style>
 
-</style>
+<script setup lang="ts">
+import { message } from 'ant-design-vue';
 
-<script setup lang="ts"></script>
+const test = () => {
+  console.log('test')
+  message.success('test')
+}
+</script>

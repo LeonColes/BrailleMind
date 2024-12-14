@@ -3,18 +3,31 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --dotenv .env.stage",
+    "build": "nuxt build --dotenv .env.dev",
+    "dev": "nuxt dev --dotenv .env.dev",
     "prod": "nuxt dev --dotenv .env.prod",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ant-design-vue/nuxt": "latest",
+    "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "^4.2.6",
+    "depcheck": "^1.4.7",
+    "ioredis": "^5.4.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "md5": "^2.3.0",
+    "mysql2": "^3.11.5",
+    "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",
-    "unplugin-vue-components": "^0.27.5",
+    "uuid": "^11.0.3",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/md5": "^2.3.5"
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    这是登录页面
+    login page
   </div>
 </template>
 
