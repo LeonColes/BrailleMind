@@ -6,9 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from "nuxt/app";
-import { onMounted, ref } from 'vue';
-
 const route = useRoute();  // Nuxt3路由
 const router = useRouter();  // Vue3路由
 const config = useRuntimeConfig(); // 运行时配置

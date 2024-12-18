@@ -1,9 +1,9 @@
 import Joi from "joi"
 import md5 from "md5"
 import { v4 as uuidv4 } from "uuid"
-import db from "../../../utils/db/mysql"
-import redis from "../../../utils/db/redis"
-import { responseJson } from "../../../utils/helper"
+import db from "~/utils/db/mysql"
+import redis from "~/utils/db/redis"
+import { responseJson } from "~/utils/helper"
 import { RowDataPacket, ResultSetHeader } from "mysql2"
 
 export default defineEventHandler(async (event) => {

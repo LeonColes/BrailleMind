@@ -1,9 +1,9 @@
 import Joi from "joi"
 import md5 from "md5"
 import jwt from "jsonwebtoken"
-import db from "../../../utils/db/mysql"
-import { responseJson } from "../../../utils/helper"
-import { RowDataPacket, ResultSetHeader } from 'mysql2'; // 导入类型
+import db from "~/utils/db/mysql"
+import { responseJson } from "~/utils/helper"
+import { RowDataPacket } from 'mysql2'; // 导入类型
 
 export default defineEventHandler(async (event) => {
 
@@ -11,10 +11,11 @@ export default defineEventHandler(async (event) => {
 
   // 格式校验
   const schema = Joi.object({
-    email: Joi.string().email().required(),
+    username: Joi.string(),
+    email: Joi.string().email(),
     phone: Joi.string().pattern(/^(?:(?:\+|00)86)?1[3-9]\d{9}$/),
     password: Joi.any().required(),
-  }).xor('email', 'phone')
+  }).xor('email', 'phone', 'username')
 
   try { await schema.validateAsync(body) }
   catch (err) { return responseJson(400, '参数格式错误', null) }
@@ -30,9 +31,12 @@ export default defineEventHandler(async (event) => {
     if (body.email) {
       query = 'SELECT * FROM users WHERE email = ? AND password = ?'
       params = [body.email, password]
-    } else {
+    } else if (body.phone) {
       query = 'SELECT * FROM users WHERE phone = ? AND password = ?'
       params = [body.phone, password]
+    } else {
+      query = 'SELECT * FROM users WHERE nickname = ? AND password = ?'
+      params = [body.username, password]
     }
 
     // 登录校验
@@ -46,9 +50,14 @@ export default defineEventHandler(async (event) => {
       { expiresIn: '1d' }
     )
 
-    return responseJson(200, '登录成功', { token })
+    // 用户名
+    const name = checkUser[0].nickname || checkUser[0].email || checkUser[0].phone
+    const avatar = checkUser[0].avatar
+
+    return responseJson(200, '登录成功', { avatar, name, token })
   }
   catch (err) {
+    console.error("登录时出错:", err)
     return responseJson(500, '服务器错误',  (err as Error).message)
   }
 })

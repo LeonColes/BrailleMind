@@ -13,8 +13,11 @@
   "dependencies": {
     "@ant-design-vue/nuxt": "latest",
     "@ant-design/icons-vue": "^7.0.1",
+    "@nuxt/eslint": "^0.7.3",
+    "@pinia/nuxt": "^0.9.0",
     "ant-design-vue": "^4.2.6",
     "depcheck": "^1.4.7",
+    "eslint": "^9.17.0",
     "ioredis": "^5.4.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
@@ -22,12 +25,17 @@
     "mysql2": "^3.11.5",
     "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",
+    "pinia": "^2.3.0",
     "uuid": "^11.0.3",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/md5": "^2.3.5"
+    "@types/md5": "^2.3.5",
+    "@types/nodemailer": "^6.4.17"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

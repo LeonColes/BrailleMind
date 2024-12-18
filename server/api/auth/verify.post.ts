@@ -1,7 +1,7 @@
 import Joi from "joi"
 import nodemailer from "nodemailer"
-import redis from "../../../utils/db/redis"
-import { responseJson } from "../../../utils/helper"
+import redis from "~/utils/db/redis"
+import { responseJson } from "~/utils/helper"
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

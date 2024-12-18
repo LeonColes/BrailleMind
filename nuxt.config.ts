@@ -1,6 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Components from 'unplugin-vue-components/vite'
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -9,7 +7,15 @@ export default defineNuxtConfig({
     transpile: ['ant-design-vue'],
   },
   modules: [
-    '@ant-design-vue/nuxt'
+    '@ant-design-vue/nuxt',
+    [ '@pinia/nuxt', {
+      autoImports: [
+        // 自动引入 `defineStore()`
+        'defineStore',
+        // 自动引入 `defineStore()` 并重命名为 `definePiniaStore()`
+        ['defineStore', 'definePiniaStore'],
+      ],
+    }],
   ],
   dir: {
     layouts: 'layouts', // 自定义布局文件夹
@@ -17,6 +23,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       colorPrimary: '#1890ff', // 主题色
+      baseUrl: process.env.BASE_URL,
     },
     // SMTP配置
     smtp: {
