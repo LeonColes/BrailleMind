@@ -2,7 +2,7 @@ import type { UserType } from "~/types/user";
 
 export const loginApi = async (userData: UserType) => {
   const config = useRuntimeConfig();
-  const baseUrl = config.public.baseUrl + '/auth';
+  const baseUrl = config.public.baseUrl + '/api/auth';
   try {
     const res = await $fetch(baseUrl + '/login', {
       method: 'POST',

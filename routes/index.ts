@@ -3,10 +3,11 @@ import type { FunctionalComponent } from 'vue';  // 函数式组件类型
 
 interface itemsType {
   key: string;
-  icon: FunctionalComponent;
-  label: string;
-  path: string;
+  icon?: FunctionalComponent;
+  label?: string;
+  path?: string;
   children?: itemsType[];
+  showSider?: boolean;
 }
 
 const items: itemsType[] = [
@@ -19,14 +20,25 @@ const items: itemsType[] = [
   {
     key: 'homework',
     icon: DesktopOutlined,
-    label: '作业',
-    path: '/homework',
+    label: '作业管理',
     children: [
       {
-        key: 'homework-sub',
+        key: 'homework-view',
         icon: PieChartOutlined,
-        label: 'Sub',
-        path: '/homework/sub',
+        label: '作业查看',
+        path: '/homework',
+      },
+      {
+        key: 'homework-publish',
+        icon: PieChartOutlined,
+        label: '作业发布',
+        path: '/homework/publish',
+      },
+      {
+        key: 'homework-correct',
+        icon: PieChartOutlined,
+        label: '作业批改',
+        path: '/homework/correct',
       }
     ]
   },
