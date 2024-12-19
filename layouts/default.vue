@@ -10,12 +10,25 @@
       <a-menu v-model:selected-keys="selectedKeys" theme="light" mode="inline">
         <!-- 遍历菜单项 -->
         <template v-for="item in items">
+          <a-tooltip :title="item.label" v-if="collapsed">
+            <a-menu-item
+              v-if="!item.children"
+              :key="item.key"
+              :title="collapsed ? item.label : ''"
+            >
+              <NuxtLink :to="item.path">
+                <!-- 显示图标 -->
+                <component :is="item.icon" />
+                <span v-if="!collapsed">{{ item.label }}</span>
+              </NuxtLink>
+            </a-menu-item>
+          </a-tooltip>
           <a-menu-item
-            v-if="!item.children"
+            v-else-if="!item.children"
             :key="item.key"
             :title="collapsed ? item.label : ''"
           >
-            <NuxtLink :to="item.path" v-if="!item.showSider">
+            <NuxtLink :to="item.path">
               <!-- 显示图标 -->
               <component :is="item.icon" />
               <span v-if="!collapsed">{{ item.label }}</span>
@@ -31,7 +44,7 @@
             </template>
             <!-- 遍历子菜单项 -->
             <a-menu-item v-for="subItem in item.children" :key="subItem.key">
-              <NuxtLink :to="subItem.path" v-if="!subItem.showSider">
+              <NuxtLink :to="subItem.path">
                 <component :is="subItem.icon" />
                 <span v-if="!collapsed">{{ subItem.label }}</span>
               </NuxtLink>
@@ -95,7 +108,7 @@ watch(collapsed, (newVal) => {
 });
 
 definePageMeta({
-  middleware: ['auth'] as any[],
+  middleware: ['auth'],
 });
 </script>
 

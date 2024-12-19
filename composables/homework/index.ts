@@ -14,7 +14,7 @@ export const useHomeworkApi = () => {
 
   const updateHomework = async (homeworkData: any) => {
     try {
-      const response = await $fetch('/api/homework/update', {
+      const response = await $fetch('/api/homework/updata', {
         method: 'POST',
         body: homeworkData,
       });

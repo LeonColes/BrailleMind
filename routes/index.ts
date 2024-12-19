@@ -35,6 +35,12 @@ const items: itemsType[] = [
         path: '/homework/publish',
       },
       {
+        key: 'homework-details',
+        icon: PieChartOutlined,
+        label: '作业详情',
+        path: '/homework/datails',
+      },
+      {
         key: 'homework-correct',
         icon: PieChartOutlined,
         label: '作业批改',

@@ -1,7 +1,7 @@
 <template>
   <a-card title="发布作业">
     <template #extra>
-      <a-button type="primary" html-type="submit">发布作业</a-button>
+      <a-button type="primary" @click="handleSubmit">发布作业</a-button>
     </template>
     <a-flex justify="center">
       <a-form :model="formState" @submit.prevent="handleSubmit" style="width: 600px;"

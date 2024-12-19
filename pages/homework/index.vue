@@ -115,7 +115,7 @@ const fetchHomeworkList = async () => {
 
 const handleEdit = (record: Homework) => {
   homeworkStore.setCurrentHomework(record);
-  router.push({ path: "/publish" });
+  router.push({ path: "/homework/publish" });
 };
 
 const handleDelete = (record: Homework) => {
