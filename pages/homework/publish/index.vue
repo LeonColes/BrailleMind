@@ -4,63 +4,65 @@
       <a-button type="primary" @click="handleSubmit">发布作业</a-button>
     </template>
     <a-flex justify="center">
-      <a-form :model="formState" @submit.prevent="handleSubmit" style="width: 600px;"
-    >
-      <a-form-item label="作业名称" :rules="[{ required: true, message: '请输入作业名称' }]">
-        <a-input v-model:value="formState.name" placeholder="请输入作业名称" />
-      </a-form-item>
-      <a-flex gap="30">
-        <a-form-item label="作业满分" :rules="[{ required: true, message: '请输入满分成绩' }]">
-          <a-input v-model:value="formState.fullScore" placeholder="请输入满分成绩" />
+      <a-form :model="formState" @submit.prevent="handleSubmit" style="width: 600px;">
+        <a-form-item label="作业名称" :rules="[{ required: true, message: '请输入作业名称' }]">
+          <a-input v-model:value="formState.name" placeholder="请输入作业名称" />
         </a-form-item>
-        <a-form-item label="作业及格" :rules="[{ required: true, message: '请输入及格成绩' }]">
-          <a-input v-model:value="formState.passScore" placeholder="请输入及格成绩" />
+        <a-flex gap="30">
+          <a-form-item label="作业满分" :rules="[{ required: true, message: '请输入满分成绩' }]">
+            <a-input v-model:value="formState.fullScore" placeholder="请输入满分成绩" />
+          </a-form-item>
+          <a-form-item label="作业及格" :rules="[{ required: true, message: '请输入及格成绩' }]">
+            <a-input v-model:value="formState.passScore" placeholder="请输入及格成绩" />
+          </a-form-item>
+        </a-flex>
+        <a-form-item label="作业内容" :rules="[{ required: true, message: '请输入作业内容' }]">
+          <a-textarea v-model:value="formState.content" placeholder="请输入作业内容" />
         </a-form-item>
-      </a-flex>
-      <a-form-item label="作业内容" :rules="[{ required: true, message: '请输入作业内容' }]">
-        <a-textarea v-model:value="formState.content" placeholder="请输入作业内容" />
-      </a-form-item>
-      <a-form-item label="其他材料">
-        <a-upload-dragger
-          v-model:fileList="fileList"
-          name="file"
-          :multiple="true"
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          @change="handleChange"
-          @drop="handleDrop"
-        >
-          <p class="ant-upload-drag-icon">
-            <inbox-outlined />
-          </p>
-          <p class="ant-upload-text">单击或拖动文件到此区域进行上传</p>
-          <p class="ant-upload-hint">
-            支持单个或批量上传。严格禁止上传公司数据或其他波段文件
-          </p>
-        </a-upload-dragger>
-      </a-form-item>
-      <a-form-item label="规定时间">
-        <a-range-picker v-model:value="formState.timeRange" />
-      </a-form-item>
-      <a-form-item label="发布方式">
-        <a-radio-group v-model:value="formState.publishType">
-          <a-radio value="immediate">立即发布</a-radio>
-          <a-radio value="scheduled">定时发布</a-radio>
-        </a-radio-group>
-      </a-form-item>
-    </a-form>
+        <a-form-item label="其他材料">
+          <a-upload-dragger
+            v-model:fileList="fileList"
+            name="file"
+            :multiple="true"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            @change="handleChange"
+            @drop="handleDrop"
+          >
+            <p class="ant-upload-drag-icon">
+              <inbox-outlined />
+            </p>
+            <p class="ant-upload-text">单击或拖动文件到此区域进行上传</p>
+            <p class="ant-upload-hint">
+              支持单个或批量上传。严格禁止上传公司数据或其他波段文件
+            </p>
+          </a-upload-dragger>
+        </a-form-item>
+        <a-form-item label="规定时间">
+          <a-range-picker v-model:value="formState.timeRange" />
+        </a-form-item>
+        <a-form-item label="发布方式">
+          <a-radio-group v-model:value="formState.publishType">
+            <a-radio value="immediate">立即发布</a-radio>
+            <a-radio value="scheduled">定时发布</a-radio>
+          </a-radio-group>
+        </a-form-item>
+      </a-form>
     </a-flex>
   </a-card>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useHomeworkStore } from '~/store/homework';
 import { message } from 'ant-design-vue';
 import { InboxOutlined } from '@ant-design/icons-vue';
 import { useHomeworkApi } from '~/composables/homework';
+import dayjs from 'dayjs';
 
 const { createHomework, updateHomework } = useHomeworkApi();
 const homeworkStore = useHomeworkStore();
+const router = useRouter();
 
 const formState = ref<{
   id: string;
@@ -68,7 +70,7 @@ const formState = ref<{
   fullScore: string;
   passScore: string;
   content: string;
-  timeRange: [string, string];
+  timeRange: [dayjs.Dayjs, dayjs.Dayjs];
   publishType: string;
 }>({
   id: '',
@@ -76,7 +78,7 @@ const formState = ref<{
   fullScore: '',
   passScore: '',
   content: '',
-  timeRange: ['', ''],
+  timeRange: [dayjs(), dayjs()],
   publishType: 'immediate',
 });
 
@@ -99,7 +101,7 @@ const resetForm = () => {
     fullScore: '',
     passScore: '',
     content: '',
-    timeRange: ['', ''],
+    timeRange: [dayjs(), dayjs()],
     publishType: 'immediate',
   };
   fileList.value = [];
@@ -108,7 +110,7 @@ const resetForm = () => {
 const handleSubmit = async () => {
   try {
     const files = fileList.value.map((file: any) => file.url);
-    const [timeRangeStart, timeRangeEnd] = formState.value.timeRange;
+    const [timeRangeStart, timeRangeEnd] = formState.value.timeRange.map(date => date.format('YYYY-MM-DD HH:mm:ss'));
     const homeworkData = {
       id: formState.value.id,
       name: formState.value.name,
@@ -128,6 +130,7 @@ const handleSubmit = async () => {
       message.success('作业发布成功');
     }
     resetForm(); // 清除表单
+    router.push('/homework'); // 返回作业列表页面
   } catch (error) {
     message.error('作业发布失败');
   }
@@ -142,7 +145,7 @@ onMounted(() => {
       fullScore: homework.full_score.toString(),
       passScore: homework.pass_score.toString(),
       content: homework.content,
-      timeRange: [homework.time_range_start, homework.time_range_end],
+      timeRange: [dayjs(homework.time_range_start), dayjs(homework.time_range_end)],
       publishType: homework.publish_type,
     };
     homeworkStore.clearCurrentHomework();

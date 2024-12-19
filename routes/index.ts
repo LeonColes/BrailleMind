@@ -24,25 +24,19 @@ const items: itemsType[] = [
     children: [
       {
         key: 'homework-view',
-        icon: PieChartOutlined,
+        // icon: PieChartOutlined,
         label: '作业查看',
         path: '/homework',
       },
       {
         key: 'homework-publish',
-        icon: PieChartOutlined,
+        // icon: PieChartOutlined,
         label: '作业发布',
         path: '/homework/publish',
       },
       {
-        key: 'homework-details',
-        icon: PieChartOutlined,
-        label: '作业详情',
-        path: '/homework/datails',
-      },
-      {
         key: 'homework-correct',
-        icon: PieChartOutlined,
+        // icon: PieChartOutlined,
         label: '作业批改',
         path: '/homework/correct',
       }
