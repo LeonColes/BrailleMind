@@ -10,10 +10,8 @@ export default defineNuxtConfig({
     '@ant-design-vue/nuxt',
     [ '@pinia/nuxt', {
       autoImports: [
-        // 自动引入 `defineStore()`
-        'defineStore',
-        // 自动引入 `defineStore()` 并重命名为 `definePiniaStore()`
-        ['defineStore', 'definePiniaStore'],
+        'defineStore',  // 自动引入 `defineStore()`
+        ['defineStore', 'definePiniaStore'], // 别名
       ],
     }],
   ],

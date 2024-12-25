@@ -1,9 +1,8 @@
 import type { UserType } from "~/types/user";
 
 export const loginApi = async (userData: UserType) => {
-  const baseUrl = '/api/auth';
   try {
-    const res = await $fetch(baseUrl + '/login', {
+    const res = await $fetch('/api/auth/login', {
       method: 'POST',
       body: userData
     });
