@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2024-12-25',
   devtools: { enabled: true },
   build: {
     transpile: ['ant-design-vue'],
@@ -17,13 +17,21 @@ export default defineNuxtConfig({
       ],
     }],
   ],
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: process.env.BASE_URL,  // 代理地址
+        changeOrigin: true,  // 将请求的源更改为代理的 URL
+        prependPath: true  // 削掉重复的/api
+      }
+    }
+  },
   dir: {
     layouts: 'layouts', // 自定义布局文件夹
   },
   runtimeConfig: {
     public: {
       colorPrimary: '#1890ff', // 主题色
-      baseUrl: process.env.BASE_URL,
     },
     // SMTP配置
     smtp: {
