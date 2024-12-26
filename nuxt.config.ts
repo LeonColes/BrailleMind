@@ -1,11 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-12-25',
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
+  ssr: true,
   build: {
     transpile: ['ant-design-vue'],
   },
+
   modules: [
     '@ant-design-vue/nuxt',
     [ '@pinia/nuxt', {
@@ -15,24 +16,27 @@ export default defineNuxtConfig({
       ],
     }],
   ],
+
   nitro: {
-    devProxy: {
+    devProxy: process.env.BASE_MODE != 'local' ? {
       '/api': {
         target: process.env.BASE_URL,  // 代理地址
         changeOrigin: true,  // 将请求的源更改为代理的 URL
         prependPath: true  // 削掉重复的/api
       }
-    }
+    } : {}
   },
+
   dir: {
     layouts: 'layouts', // 自定义布局文件夹
   },
+
   vite: {
-    cacheDir: 'node_modules/.vite_cache',  // 缓存目录
-    optimizeDeps: {
-      include: ['@nuxtjs/composition-api'],
-    },
+    build: {
+      sourcemap: false
+    }
   },
+
   runtimeConfig: {
     // SMTP配置
     smtp: {
@@ -56,5 +60,7 @@ export default defineNuxtConfig({
       port: process.env.REDIS_PORT,
       password: process.env.REDIS_PASS,
     }
-  }
+  },
+
+  compatibilityDate: '2024-12-26'
 })
