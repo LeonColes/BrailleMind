@@ -1,11 +1,12 @@
 <template>
   <a-flex>
     <a-flex justify="center" align="center" class="background">
-      <a-image
+      <!-- <a-image
         :preview="false"
         height="100vh"
         src="https://introduce.mcdd.top/fmin-min-48fbc53a-login.png"
-      />
+      /> -->
+      <img src="../../public/background.png" alt="背景图片" style="height: 100vh;">
     </a-flex>
 
     <a-flex justify="center" align="center" class="login">
