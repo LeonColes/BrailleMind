@@ -5,8 +5,11 @@ export default defineNuxtRouteMiddleware((to) => {
 const userStore = useUserStore();
   const token = useCookie('token').value;
   if(!token && to.path !== '/login') {
-    message.warning('登录已过期，请重新登录');
-    return navigateTo('/login');
+    Modal.warning({
+      title: '重新登录',
+      content: '身份验证失效，请重新登录',
+      onOk: () => navigateTo('/login')
+    });
   }
   else userStore.setUserInfo(userStore)
 })
