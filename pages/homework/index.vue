@@ -1,10 +1,11 @@
 <template>
   <a-table :columns="columns" :dataSource="homeworkList" rowKey="id">
     <template #action="{ record }">
-      <a-space size="middle">
+      <a-flex :vertical="true" size="middle">
         <a-button type="link" @click="handleEdit(record)">编辑</a-button>
+        <!-- <a-button type="link" @click="handleCorrect(record)">批改</a-button> -->
         <a-button type="link" @click="handleDelete(record)">删除</a-button>
-      </a-space>
+      </a-flex>
     </template>
   </a-table>
 </template>
@@ -116,6 +117,11 @@ const fetchHomeworkList = async () => {
 const handleEdit = (record: Homework) => {
   homeworkStore.setCurrentHomework(record);
   router.push({ path: "/homework/publish" });
+};
+
+const handleCorrect = (record: Homework) => {
+  homeworkStore.setCurrentHomework(record);
+  router.push({ path: "/homework/correct" });
 };
 
 const handleDelete = (record: Homework) => {

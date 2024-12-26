@@ -1,5 +1,5 @@
 import { PieChartOutlined, DesktopOutlined, UserOutlined, TeamOutlined, FileOutlined } from "@ant-design/icons-vue";
-import type { FunctionalComponent } from 'vue';  // 函数式组件类型
+import type { FunctionalComponent } from 'vue';
 
 interface itemsType {
   key: string;
@@ -21,22 +21,15 @@ const items: itemsType[] = [
     key: 'homework',
     icon: DesktopOutlined,
     label: '作业管理',
+    path: '/homework',
     children: [
       {
-        key: 'homework-view',
-        // icon: PieChartOutlined,
-        label: '作业查看',
-        path: '/homework',
-      },
-      {
         key: 'homework-publish',
-        // icon: PieChartOutlined,
         label: '作业发布',
         path: '/homework/publish',
       },
       {
         key: 'homework-correct',
-        // icon: PieChartOutlined,
         label: '作业批改',
         path: '/homework/correct',
       }

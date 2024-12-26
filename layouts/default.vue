@@ -1,9 +1,9 @@
 <template>
   <a-layout style="min-height: 100vh;">
     <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
-      v-model:collapsed="collapsed" theme="light" collapsible>
+      v-model:collapsed="collapsed" :theme="darkMode ? 'dark' : 'light'" collapsible>
       <div class="logo" />
-      <a-menu v-model:selected-keys="selectedKeys" theme="light" mode="inline">
+      <a-menu v-model:selected-keys="selectedKeys" :theme="darkMode ? 'dark' : 'light'" mode="inline">
         <!-- 遍历菜单项 -->
         <template v-for="item in items">
           <a-tooltip :title="item.label" v-if="collapsed">
@@ -42,14 +42,14 @@
       </a-menu>
     </a-layout-sider>
     <a-layout :style="{ marginLeft: !collapsed ? '200px' : '80px' }">
-      <a-layout-header style="background-color: #fff">
+      <a-layout-header :style="darkMode ? { background: '#141414', color: '#fff' } : { background: '#fff', color: '#000' }">
         <a-flex justify="space-between" align="center" style="height: 100%">
-          <a-typography-text :level="4">明光，只为照亮你</a-typography-text>
+          <!-- <text>明光，只为照亮你</text> -->
           <a-switch v-model:checked="darkMode">
             <template #checkedChildren><check-outlined /></template>
             <template #unCheckedChildren><close-outlined /></template>
           </a-switch>
-          <a-dropdown arrow placement="bottomCenter">
+          <a-dropdown arrow placement="bottom">
             <template #overlay>
               <a-menu>
                 <a-menu-item key="1">
@@ -101,6 +101,13 @@ watch(collapsed, (newVal) => {
   } else {
     selectedKeys.value = ["1"];
   }
+});
+
+const route = useRoute();  // Nuxt3路由
+const router = useRouter();  // Vue3路由
+
+onMounted(() => {
+  if(route.path === '/') router.replace('/home');
 });
 
 const darkMode = ref<boolean>(false);

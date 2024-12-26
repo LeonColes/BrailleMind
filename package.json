@@ -28,6 +28,7 @@
     "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",
     "pinia": "^2.3.0",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "uuid": "^11.0.3",
     "vue": "latest",
     "vue-router": "latest"
