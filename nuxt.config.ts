@@ -27,10 +27,13 @@ export default defineNuxtConfig({
   dir: {
     layouts: 'layouts', // 自定义布局文件夹
   },
-  runtimeConfig: {
-    public: {
-      colorPrimary: '#1890ff', // 主题色
+  vite: {
+    cacheDir: 'node_modules/.vite_cache',  // 缓存目录
+    optimizeDeps: {
+      include: ['@nuxtjs/composition-api'],
     },
+  },
+  runtimeConfig: {
     // SMTP配置
     smtp: {
       host: process.env.SMTP_HOST,

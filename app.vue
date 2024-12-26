@@ -8,10 +8,11 @@
 <script setup lang="ts">
 const route = useRoute();  // Nuxt3路由
 const router = useRouter();  // Vue3路由
-const config = useRuntimeConfig(); // 运行时配置
+const appConfig = useAppConfig()
+
 const theme = ref({
   token: {
-    colorPrimary: config.public.colorPrimary,
+    colorPrimary: appConfig.theme.primaryColor,
   },
 });
 
