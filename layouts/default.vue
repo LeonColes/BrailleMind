@@ -1,21 +1,13 @@
 <template>
-  <a-layout style="min-height: 100vh">
-    <a-layout-sider
-      class="scroll sider-scroll"
-      v-model:collapsed="collapsed"
-      theme="light"
-      collapsible
-    >
+  <a-layout style="min-height: 100vh;">
+    <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
+      v-model:collapsed="collapsed" theme="light" collapsible>
       <div class="logo" />
       <a-menu v-model:selected-keys="selectedKeys" theme="light" mode="inline">
         <!-- 遍历菜单项 -->
         <template v-for="item in items">
           <a-tooltip :title="item.label" v-if="collapsed">
-            <a-menu-item
-              v-if="!item.children"
-              :key="item.key"
-              :title="collapsed ? item.label : ''"
-            >
+            <a-menu-item v-if="!item.children" :key="item.key" :title="collapsed ? item.label : ''">
               <NuxtLink :to="item.path">
                 <!-- 显示图标 -->
                 <component :is="item.icon" />
@@ -23,11 +15,7 @@
               </NuxtLink>
             </a-menu-item>
           </a-tooltip>
-          <a-menu-item
-            v-else-if="!item.children"
-            :key="item.key"
-            :title="collapsed ? item.label : ''"
-          >
+          <a-menu-item v-else-if="!item.children" :key="item.key" :title="collapsed ? item.label : ''">
             <NuxtLink :to="item.path">
               <!-- 显示图标 -->
               <component :is="item.icon" />
@@ -53,26 +41,36 @@
         </template>
       </a-menu>
     </a-layout-sider>
-    <a-layout class="scroll content-scroll">
+    <a-layout :style="{ marginLeft: !collapsed ? '200px' : '80px' }">
       <a-layout-header style="background-color: #fff">
         <a-flex justify="space-between" align="center" style="height: 100%">
           <a-typography-text :level="4">明光，只为照亮你</a-typography-text>
-          <a-popover>
-            <template #content>
-              <a-button type="text">
-                退出登录
-                <template #icon><PoweroffOutlined /></template>
-              </a-button>
+          <a-switch v-model:checked="darkMode">
+            <template #checkedChildren><check-outlined /></template>
+            <template #unCheckedChildren><close-outlined /></template>
+          </a-switch>
+          <a-dropdown arrow placement="bottomCenter">
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="1">
+                  <UserOutlined /> 个人中心
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <PoweroffOutlined /> 退出登录
+                </a-menu-item>
+              </a-menu>
             </template>
             <a-button type="primary">
               {{ userStore.name }}
-              <template v-if="userStore.name" #icon><SmileOutlined /></template>
+              <template #icon>
+                <SmileOutlined />
+              </template>
             </a-button>
-          </a-popover>
+          </a-dropdown>
         </a-flex>
       </a-layout-header>
-      <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin-top: 18px">
+      <a-layout-content>
+        <a-breadcrumb style="margin: 8px">
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
@@ -91,10 +89,8 @@
 import { ref, watch } from "vue";
 import items from "../routes";
 import { useUserStore } from "~/store/user";
-import "../styles/scroll.css"; // 引用 scroll.css 文件
 
 const userStore = useUserStore();
-
 const collapsed = ref<boolean>(false);
 const selectedKeys = ref<string[]>(["1"]);
 
@@ -107,9 +103,7 @@ watch(collapsed, (newVal) => {
   }
 });
 
-// definePageMeta({
-//   middleware: ['auth'],
-// });
+const darkMode = ref<boolean>(false);
 </script>
 
 <style scoped>

@@ -66,6 +66,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: false
+});
+
 import { reactive, computed } from "vue";
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import { loginApi } from "~/composables/user";

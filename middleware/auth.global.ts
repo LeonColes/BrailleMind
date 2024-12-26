@@ -2,7 +2,6 @@
 import { useUserStore } from '~/store/user';
 
 export default defineNuxtRouteMiddleware((to) => {
-const userStore = useUserStore();
   const token = useCookie('token').value;
   if(!token && to.path !== '/login') {
     Modal.warning({
@@ -11,5 +10,4 @@ const userStore = useUserStore();
       onOk: () => navigateTo('/login')
     });
   }
-  else userStore.setUserInfo(userStore)
 })
