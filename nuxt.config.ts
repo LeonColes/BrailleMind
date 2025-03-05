@@ -17,8 +17,8 @@ export default defineNuxtConfig({
     }],
   ],
 
-  nitro: {
-    devProxy: process.env.BASE_MODE != 'local' ? {
+  nitro: { // 前端跨域
+    devProxy: process.env.BASE_MODE != 'stage' ? {
       '/api': {
         target: process.env.BASE_URL,  // 代理地址
         changeOrigin: true,  // 将请求的源更改为代理的 URL

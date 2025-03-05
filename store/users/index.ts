@@ -1,4 +1,5 @@
-import type { UserInfoType } from '~/types/user';
+import { defineStore } from 'pinia';
+import type { UserInfoType } from '~/types/users';
 
 export const useUserStore = defineStore('user', {
   state: () => ({

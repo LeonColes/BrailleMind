@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
       subject: '邮箱验证',
       html: `
           <h2>您好! ${body.nickname}，</h2>
-          <p>感谢您注册 Suphenv！以下是您的验证码：</p>
+          <p>感谢您注册 明光！以下是您的验证码：</p>
           <h1>${code}</h1>
           <p>验证码的有效期为<b>15</b>分钟，请您尽快完成验证。</p>
           <p>如果您没有注册此账号，请忽略此邮件。</p>

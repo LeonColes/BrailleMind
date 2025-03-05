@@ -5,40 +5,25 @@ Vue3.51 + Nuxt3.14 + Ant Design Vue
 ```
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## 该项目所需环境
+前端：Node + yarn
+后端：Node + Docker
+
 ## Setup
-
 Make sure to install dependencies:
-
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
 # yarn
 yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
-
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
+# 测试环境
 yarn dev
-
-# bun
-bun run dev
+# 生产环境
+yarn prod
 ```
 
 ## Production
@@ -76,6 +61,30 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+
+# 
+### docker构造环境
+#### stage：
+```
+# mysql
+docker run --name stage-mysql -e MYSQL_ROOT_PASSWORD=symxll -p 3307:3306 --restart always -d mysql:latest
+
+# redis
+docker run --name stage-redis -p 6380:6379 --restart always -d redis:alpine --requirepass symxll
+```
+
+#### prod：
+```
+# mysql
+docker run --name prod-mysql -e MYSQL_ROOT_PASSWORD=symxll -p 3306:3306 --restart always -d mysql:latest
+
+# redis
+docker run --name stage-redis -p 6379:6379 --restart always -d redis:alpine redis-server --requirepass symxll
+# Tip：--requirepass your-password 
+```
+
 
 # Docker Build
 ```

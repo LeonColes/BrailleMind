@@ -1,4 +1,4 @@
-import type { UserType } from "~/types/user";
+import type { UserType } from "~/types/users";
 
 export const loginApi = async (userData: UserType) => {
   try {
