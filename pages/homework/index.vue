@@ -1,5 +1,7 @@
 <template>
-  <a-table :columns="columns" :dataSource="homeworkList" rowKey="id">
+  <a-card title="作业列表">
+    <template #extra><a-button type="primary" @click="handlePublish">发布作业</a-button></template>
+    <a-table :columns="columns" :dataSource="homeworkList" rowKey="id">
     <template #action="{ record }">
       <a-flex :vertical="true" size="middle">
         <a-button type="link" @click="handleEdit(record)">编辑</a-button>
@@ -8,6 +10,7 @@
       </a-flex>
     </template>
   </a-table>
+  </a-card>
 </template>
 
 <script lang="ts" setup>
@@ -138,6 +141,10 @@ const handleDelete = (record: Homework) => {
       }
     },
   });
+};
+
+const handlePublish = () => {
+  router.push({ path: "/homework/publish" });
 };
 
 onMounted(() => {

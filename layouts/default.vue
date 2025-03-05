@@ -33,16 +33,8 @@
       </a-menu>
     </a-layout-sider>
     <a-layout :style="{ marginLeft: !collapsed ? '200px' : '80px' }">
-      <a-layout-header
-        :style="darkMode ? { background: '#141414', color: '#fff' } : { background: '#fff', color: '#000' }">
+      <a-layout-header :style="darkMode ? { background: '#141414', color: '#fff' } : { background: '#fff', color: '#000' }">
         <a-flex justify="space-between" align="center" style="height: 100%">
-          <!-- <text>明光，只为照亮你</text> -->
-
-          <!-- <a-switch v-model:checked="darkMode">
-            <template #checkedChildren><check-outlined /></template>
-            <template #unCheckedChildren><close-outlined /></template>
-          </a-switch> -->
-
           <a-dropdown arrow placement="bottom">
             <template #overlay>
               <a-menu>
@@ -80,13 +72,79 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import items from "../routes";
+import { ref, watch, onMounted } from "vue";
 import { useUserStore } from "~/store/users";
+import { PieChartOutlined, DesktopOutlined, UserOutlined, TeamOutlined, FileOutlined } from "@ant-design/icons-vue";
+import type { FunctionalComponent } from 'vue';
 
 const userStore = useUserStore();
 const collapsed = ref<boolean>(false);
 const selectedKeys = ref<string[]>(["1"]);
+
+interface itemsType {
+  key: string;
+  icon?: FunctionalComponent;
+  label?: string;
+  path?: string;
+  children?: itemsType[];
+}
+
+const items: itemsType[] = [
+  {
+    key: 'home',
+    icon: PieChartOutlined,
+    label: 'Home',
+    path: '/home'
+  },
+  {
+    key: 'homework',
+    icon: DesktopOutlined,
+    label: '作业管理',
+    path: '/homework',
+    children: [
+      {
+        key: 'homework-information',
+        label: '作业信息',
+        path: '/homework',
+      },
+      {
+        key: 'homework-correct',
+        label: '作业批改',
+        path: '/homework/correct',
+      }
+    ]
+  },
+  {
+    key: 'info',
+    icon: UserOutlined,
+    label: '信息',
+    path: '/info',
+  },
+  {
+    key: 'files',
+    icon: FileOutlined,
+    label: '文件',
+    path: '/files',
+  },
+  {
+    key: 'class',
+    icon: FileOutlined,
+    label: '班级',
+    path: '/class',
+  },
+  {
+    key: 'community',
+    icon: FileOutlined,
+    label: '社区',
+    path: '/community',
+  },
+  {
+    key: 'settings',
+    icon: TeamOutlined,
+    label: '设置',
+    path: '/settings',
+  }
+];
 
 // 监听 collapsed 状态变化以调整菜单行为
 watch(collapsed, (newVal) => {
@@ -106,3 +164,7 @@ onMounted(() => {
 
 const darkMode = ref<boolean>(false);
 </script>
+
+<style scoped>
+/* 样式定义 */
+</style>
