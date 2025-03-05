@@ -41,7 +41,7 @@
                 <a-menu-item key="1">
                   <UserOutlined /> 个人中心
                 </a-menu-item>
-                <a-menu-item key="2">
+                <a-menu-item key="2" @click="logout">
                   <PoweroffOutlined /> 退出登录
                 </a-menu-item>
               </a-menu>
@@ -163,6 +163,13 @@ onMounted(() => {
 });
 
 const darkMode = ref<boolean>(false);
+
+const logout = () => {
+  userStore.clearUserInfo();
+  const token = useCookie('token');
+  token.value = null; // 清除 cookies 中的 token
+  router.replace('/users/login');
+};
 </script>
 
 <style scoped>

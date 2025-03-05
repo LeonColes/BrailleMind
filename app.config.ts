@@ -1,5 +1,5 @@
 export default defineAppConfig({
   theme: {
-    primaryColor: "#FFC125",
+    primaryColor: "#00B96B",
   },
 });

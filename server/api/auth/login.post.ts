@@ -21,12 +21,12 @@ export default defineEventHandler(async (event) => {
   catch (err) { return responseJson(400, '参数格式错误', null) }
 
   // 严加密
-  const salt = 'suphenv'
+  const salt = 'leoncole'
   const password = md5(md5(body.password) + salt)
 
   try {
     let query = ''
-    let params = []
+    let params: (string | undefined)[] = []
 
     if (body.email) {
       query = 'SELECT * FROM users WHERE email = ? AND password = ?'
@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
     // 生成token
     const token = jwt.sign(
       { id: checkUser[0].id, email: checkUser[0].email },
-      'suphenv',
+      salt,
       { expiresIn: '1d' }
     )
 

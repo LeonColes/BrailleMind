@@ -5,6 +5,7 @@ const config = useRuntimeConfig()
 
 const db = mysql.createPool({
   host: config.mysql.host,
+  port: Number(config.mysql.port),
   database: config.mysql.database,
   user: config.mysql.user,
   password: config.mysql.password,
